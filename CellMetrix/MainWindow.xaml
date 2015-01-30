@@ -1,0 +1,148 @@
+﻿<Window x:Class="CellMetrix.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:CellMetrix"
+        Title="MainWindow"
+        Width="1200"
+        Height="800"
+        MinWidth="900"
+        MinHeight="600">
+
+   <Window.Resources>
+      <Style x:Key="NormalButtonStyle" TargetType="{x:Type Button}">
+         <Setter Property="Background" Value="LightBlue" />
+      </Style>
+      <BitmapImage x:Key="CanvasBackgroundImage">CanvasBackgroundImage.jpg</BitmapImage>
+   </Window.Resources>
+
+
+   <Grid x:Name="MainGrid"
+         Width="Auto"
+         Height="Auto"
+         Margin="0,0,0,0"
+         HorizontalAlignment="Stretch"
+         VerticalAlignment="Stretch"
+         ShowGridLines="True">
+      <Grid.ColumnDefinitions>
+         <ColumnDefinition Width="Auto" />
+         <ColumnDefinition Width="*" />
+         <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+
+
+      <!--  Left Panel  -->
+      <Grid Grid.Column="0" ShowGridLines="True">
+         <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+         </Grid.RowDefinitions>
+
+         <Grid Grid.Row="0" ShowGridLines="True">
+            <Grid.RowDefinitions>
+               <RowDefinition Height="Auto" />
+               <RowDefinition Height="*" />
+               <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="CellMetrix" />
+            <ListBox x:Name="SlideSetListBox"
+                     Grid.Row="1"
+                     Width="auto"
+                     Height="Auto"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch">
+               <ListBox.DataContext>
+                  <local:SlideSet />
+               </ListBox.DataContext>
+            </ListBox>
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
+               <Button Click="Open_Files_Button_Click" Content="Open Files" />
+               <Button Content="Run" />
+            </StackPanel>
+         </Grid>
+         <StackPanel Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+               <Button Content="Choose Color" />
+               <Rectangle Width="50"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Fill="#FF0000AE"
+                          Stroke="Black" />
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+               <Button Content="Choose Size" />
+               <TextBlock><Run Text="Lorum Ipsum" />
+               </TextBlock>
+            </StackPanel>
+         </StackPanel>
+         <StatusBar Grid.Row="2">
+            <ProgressBar />
+         </StatusBar>
+      </Grid>
+      <GridSplitter Grid.Column="0"
+                    Width="4"
+                    Height="100"
+                    Margin="0,0,0,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    ResizeBehavior="CurrentAndNext"
+                    ResizeDirection="Columns" />
+
+
+      <!--  Center Panel  -->
+      <Grid Grid.Column="1">
+         <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+         </Grid.RowDefinitions>
+
+         <Canvas Grid.Row="0"
+                 Margin="0,0,0,0"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch">
+            <Canvas.Background>
+               <ImageBrush />
+            </Canvas.Background>
+            <Image Canvas.Left="52"
+                   Canvas.Top="95"
+                   Width="790.347"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Source="{StaticResource CanvasBackgroundImage}" />
+         </Canvas>
+         <DataGrid Grid.Row="1" />
+      </Grid>
+
+      <!--  Right Panel  -->
+      <Grid Grid.Column="2" ShowGridLines="True">
+         <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+         </Grid.RowDefinitions>
+
+         <TextBlock Grid.Row="0"><Run Text="Placeholder For Navigation Map" />
+         </TextBlock>
+         <GridSplitter Grid.Row="0"
+                       Width="100"
+                       Height="4"
+                       Margin="0"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       ResizeBehavior="CurrentAndNext"
+                       ResizeDirection="Rows"
+                       ToolTip="" />
+         <DataGrid Grid.Row="1">
+            <DataGrid.Columns>
+               <DataGridTextColumn />
+            </DataGrid.Columns>
+         </DataGrid>
+         <StackPanel Grid.Row="2">
+            <Button Content="Publish Results" />
+            <Button Content="Publish Project" />
+         </StackPanel>
+      </Grid>
+
+   </Grid>
+</Window>
